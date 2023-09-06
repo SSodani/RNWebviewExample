@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <style>
+            div {
+              padding: 20px;
+              border: 5px solid gray;
+              margin: 0;
+            }
+            </style>
+    </head>
+    <body>
+        
+          <div style="padding-left: 20px; padding-right: 20px;">
+            <h1 style="font-size:30px; padding: 50px; text-align: center;" 
+          id="h1_element">
+            This is simple html 
+          </h1>
+          <h2 style="font-size:30px; padding: 50px; text-align: center;" 
+          id="h2_element">
+            This will display message from app.tsx 
+          </h2>
+            <button style="font-size:30px; padding: 50px; text-align: center;" type="button" onclick="sendMessageToApp()">Send Message to App.tsx</button>
+            <script type="text/javascript">
+
+              //send data to App.tsx
+              function sendMessageToApp(message = "Hello there!!") {
+                window.ReactNativeWebView.postMessage(message);
+              }  
+                //receive data from App.tsx
+           const dataFromFrontend = message => {
+           document.getElementById('h2_element').innerHTML = message.data;
+           }
+
+           document.addEventListener("message", dataFromFrontend);
+                              
+                              //receive data from App.tsx
+           window.addEventListener("message", dataFromFrontend);
+            </script>
+          </div>
+          
+    </body>
